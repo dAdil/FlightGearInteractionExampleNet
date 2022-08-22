@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<PropertyList>
+  <generic>
+    <input>
+      <line_separator>newline</line_separator>
+      <var_separator>,</var_separator>
+
+      <!-- Position -->
+      <chunk>
+        <name>latitude-deg</name>
+        <type>float</type>
+        <node>/position/latitude-deg</node>
+        <format>%f</format>
+      </chunk>
+
+      <chunk>
+        <name>longitude-deg</name>
+        <type>float</type>
+        <node>/position/longitude-deg</node>
+        <format>%f</format>
+      </chunk>
+
+      <chunk>
+        <name>altitude-ft</name>
+        <type>float</type>
+        <node>/position/altitude-ft</node>
+        <format>%f</format>
+      </chunk>
+
+      <!-- Orientation -->
+      <chunk>
+        <name>roll-deg</name>
+        <type>float</type>
+        <node>/orientation/roll-deg</node>
+        <format>%f</format>
+      </chunk>
+
+      <chunk>
+        <name>pitch-deg</name>
+        <type>float</type>
+        <node>/orientation/pitch-deg</node>
+        <format>%f</format>
+      </chunk>
+
+      <chunk>
+        <name>heading-deg</name>
+        <type>float</type>
+        <node>/orientation/heading-deg</node>
+        <format>%f</format>
+      </chunk>
+    </input>
+  </generic>
+</PropertyList>
