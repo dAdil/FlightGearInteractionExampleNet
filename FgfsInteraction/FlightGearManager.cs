@@ -1,4 +1,6 @@
-﻿using System.Net.Sockets;
+﻿using LanguageExt.Pipes;
+using System.Net;
+using System.Net.Sockets;
 
 namespace FgfsInteraction;
 
@@ -10,15 +12,16 @@ public class FlightGearManager : IDisposable
 
     private readonly UdpClient readerClient;
     private readonly UdpClient writerClient;
-    private readonly FlightGearManagerConfiguration configuration;
 
     public FlightGearManager(ISimulator simulator, FlightGearManagerConfiguration configuration)
     {
         this.simulator = simulator;
-        this.configuration = configuration;
 
         readerClient = new UdpClient(configuration.FlightGearOutputPort);
         writerClient = new UdpClient(configuration.FlightgearInputPort);
+
+        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), configuration.FlightgearInputPort);
+        writerClient.Connect(ep);
     }
 
     public async Task Run(CancellationToken ct)
@@ -34,7 +37,7 @@ public class FlightGearManager : IDisposable
                     .UpdateState(controls)
                     .ToCommaSeparatedString();
 
-                await writerClient.SendAsciiStringAsync(aircraftStateString, "127.0.0.1", configuration.FlightgearInputPort, ct);
+                await writerClient.SendAsciiStringAsync(aircraftStateString, ct);
             });
 
             // This is pretty hacky. Would be better to run the this and the simulation on independent schedules

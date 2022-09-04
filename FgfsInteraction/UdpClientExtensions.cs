@@ -1,6 +1,4 @@
-﻿using LanguageExt;
-using System.Net;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using System.Text;
 
 namespace FgfsInteraction;
@@ -13,9 +11,9 @@ public static class UdpClientExtensions
         return Encoding.ASCII.GetString(result.Buffer);
     }
 
-    public static async Task SendAsciiStringAsync(this UdpClient client, string input, string hostName, int port, CancellationToken ct)
+    public static async Task SendAsciiStringAsync(this UdpClient client, string input, CancellationToken ct)
     {
         var bytes = Encoding.ASCII.GetBytes(input);
-        await client.SendAsync(bytes, hostName, port, ct);
+        await client.SendAsync(bytes, ct);
     }
 }
